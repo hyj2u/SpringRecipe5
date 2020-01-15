@@ -1,3 +1,5 @@
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SequenceGenerator {
@@ -6,11 +8,17 @@ public class SequenceGenerator {
     private int initial;
     private final AtomicInteger counter = new AtomicInteger();
 
+    private DatePrefixGenerator dfg;
+
     public SequenceGenerator() {
     }
 
+    public void setDfg(DatePrefixGenerator dfg) {
+        this.dfg = dfg;
+    }
+
     public void setPrefix(String prefix) {
-        this.prefix = prefix;
+        this.prefix = dfg.getPrefix();
     }
 
     public void setSuffix(String suffix) {
