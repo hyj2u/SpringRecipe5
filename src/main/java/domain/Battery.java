@@ -1,3 +1,7 @@
+package domain;
+
+import domain.Product;
+
 public class Battery extends Product {
     private boolean rechargeable;
 

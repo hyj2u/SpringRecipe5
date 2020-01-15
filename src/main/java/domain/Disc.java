@@ -1,3 +1,7 @@
+package domain;
+
+import domain.Product;
+
 public class Disc extends Product {
     private int capacity;
 
