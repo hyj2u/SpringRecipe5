@@ -5,25 +5,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
-@ComponentScan("shop")
+
 public class ShopConfiguration {
     @Bean
+    public ProductCreator productCreatorFactory(){
+        ProductCreator factory = new ProductCreator();
+        Map<String, Product> products = new HashMap<>();
+        products.put("aaa", new Battery("AAA", 2.5));
+        products.put("cdrw", new Disc("CD-RW", 1.5));
+        products.put("dvdrw", new Disc("DVD-RW", 3.0));
+        factory.setProducts(products);
+        return factory;
+    }
+    @Bean
     public Product aaa(){
-        Battery p1 = new Battery("AAA",2.5);
-        p1.setRechargeable(true);
-        return p1;
+
+        return productCreatorFactory().createProduct("aaa");
     }
     @Bean
     public Product cdrw(){
-        Disc p2 = new Disc("CD-RW", 1.5);
-        p2.setCapacity(700);
-        return p2;
+      return productCreatorFactory().createProduct("cdrw");
     }
     @Bean
     public Product dvdrw(){
-        Disc p2 = new Disc("DVD-RW", 3.0);
-        p2.setCapacity(700);
-        return p2;
+      return productCreatorFactory().createProduct("dvdrw");
     }
 }
